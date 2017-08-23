@@ -8,25 +8,45 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: 'components'
+      redirect: 'development'
     },
     {
-      path: '/hello',
-      name: 'Hello',
+      path: '/o-index',
+      name: 'o-index',
       component (resolve) {
-        require.ensure(['@/components/Hello.vue'], () => {
-          resolve(require('@/components/Hello.vue'))
+        require.ensure(['@/components/OIndex.vue'], () => {
+          resolve(require('@/components/OIndex.vue'))
         })
-      }
-    },
-    {
-      path: '/components',
-      name: 'components',
-      component (resolve) {
-        require.ensure(['@/components/components.vue'], () => {
-          resolve(require('@/components/components.vue'))
-        })
-      }
+      },
+      children: [
+        {
+          path: '/development',
+          name: 'development',
+          component (resolve) {
+            require.ensure(['@/components/ODevelopment.vue'], () => {
+              resolve(require('@/components/ODevelopment.vue'))
+            })
+          }
+        },
+        {
+          path: '/information',
+          name: 'information',
+          component (resolve) {
+            require.ensure(['@/components/OInformation.vue'], () => {
+              resolve(require('@/components/OInformation.vue'))
+            })
+          }
+        },
+        {
+          path: '/case',
+          name: 'case',
+          component (resolve) {
+            require.ensure(['@/components/OCase.vue'], () => {
+              resolve(require('@/components/OCase.vue'))
+            })
+          }
+        }
+      ]
     }
   ]
 })
